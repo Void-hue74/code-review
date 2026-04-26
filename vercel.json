@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "experimentalServices": {
-    "frontend": {
-      "entrypoint": "frontend",
-      "framework": "vite"
-    }
-  },
   "functions": {
     "api/**/*.js": {
       "runtime": "nodejs20.x"

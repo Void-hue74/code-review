@@ -3,8 +3,7 @@
   "experimentalServices": {
     "frontend": {
       "entrypoint": "frontend",
-      "framework": "vite",
-      "rootDirectory": "frontend"
+      "framework": "vite"
     }
   },
   "functions": {

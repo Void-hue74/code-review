@@ -8,10 +8,7 @@ const app = express()
 // Trust the first proxy (Render)
 app.set('trust proxy', 1)
 
-app.use(cors({
-    origin: ['http://localhost:5173', 'https://codelens-ashen.vercel.app'],
-    credentials: true
-}))
+app.use(cors())
 
 
 app.use(express.json())
@@ -30,7 +27,7 @@ const limiter = rateLimit({
 app.use('/ai', limiter)
 
 app.get('/', (req, res) => {
-    res.send('Hello World')
+    res.send('Backend is running')
 })
 
 app.use('/ai', aiRoutes)

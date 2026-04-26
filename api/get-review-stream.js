@@ -1,11 +1,4 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-
-const dotenv = require('dotenv');
-dotenv.config({ path: './backEnd/.env' });
-
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_KEY);
 
 export default async function handler(req, res) {
   // CORS headers
@@ -22,16 +15,24 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).end('Method not allowed');
   }
 
   try {
     const { code } = req.body;
 
     if (!code) {
-      return res.status(400).json({ error: 'Code is required' });
+      res.status(400).end('Code is required');
+      return;
     }
 
+    const apiKey = process.env.GOOGLE_GEMINI_KEY;
+    if (!apiKey) {
+      res.status(500).end('API key not configured');
+      return;
+    }
+
+    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     const prompt = `You are an expert code reviewer. Analyze the following code and provide a comprehensive review in this exact format:

@@ -5,6 +5,9 @@ const rateLimit = require('express-rate-limit')
 
 const app = express()
 
+// Trust the first proxy (Render)
+app.set('trust proxy', 1)
+
 app.use(cors())
 
 

@@ -34,7 +34,11 @@ function App() {
       setLastRequestTime(now)
       setReview("Reviewing...")
 
-      const response = await fetch("/api/get-review-stream", {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL 
+        ? `${import.meta.env.VITE_BACKEND_URL}/ai/get-review-stream` 
+        : "/api/get-review-stream";
+
+      const response = await fetch(backendUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

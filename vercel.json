@@ -8,20 +8,5 @@
         "distDir": "dist"
       }
     }
-  ],
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "routes": [
-    {
-      "src": "^/api/(.*)$",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "^(?!/api/)(.*)$",
-      "dest": "/index.html"
-    }
   ]
 }
